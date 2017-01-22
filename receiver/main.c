@@ -134,7 +134,6 @@ int main(void){
             case R:
                 fire();
                 break;
-
             default:
                 stop();
                 break;

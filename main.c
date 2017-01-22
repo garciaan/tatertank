@@ -132,12 +132,15 @@ int main(void){
 		}
 		else if (nes_data[Left] == ON){
 			left();
+            USART_Transmit(Left);
 		}
 		else if (nes_data[R] == ON){
 			fire();
+            USART_Transmit(R);
 		}
 		else {
 			stop();
+            USART_Transmit(255);
 		}
 		
 		_delay_ms(30);
