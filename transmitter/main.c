@@ -1,10 +1,9 @@
 
 #ifndef F_CPU
-#define F_CPU 16000000UL
+#define F_CPU 2000000UL
 #endif
-#define FOSC 1843200// Clock Speed 
-#define BAUD 9600
-#define MYUBRR FOSC/16/BAUD-1
+#define BAUD 1200
+#define UBRR 832
 #define P1 0x01
 #define P2 0x02
 #define P3 0x04
@@ -59,6 +58,8 @@ enum BUTTON {
 
 void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
+unsigned char USART_Receive( void );
+char* USART_get_string(void);
 void home_line2(void);
 void string2lcd(char *lcd_str);
 void strobe_lcd(void);
@@ -102,7 +103,7 @@ int main(void){
 	char buffer[16];
     spi_init();
     lcd_init();
-	USART_Init(MYUBRR);
+	USART_Init(UBRR);
 
 	int i;
     
@@ -123,20 +124,24 @@ int main(void){
 		}
 		else if (nes_data[Down] == ON){
 			reverse();
+            USART_Transmit(Down);
 		}
 		else if (nes_data[Right] == ON){
 			right();
+			USART_Transmit(Right);
 		}
 		else if (nes_data[Left] == ON){
 			left();
+            USART_Transmit(Left);
 		}
 		else if (nes_data[R] == ON){
 			fire();
+            USART_Transmit(R);
 		}
 		else {
 			stop();
+            USART_Transmit(255);
 		}
-
 		
 		_delay_ms(30);
 		
@@ -389,6 +394,12 @@ void USART_Transmit( unsigned char data ) {
     /* Put data into buffer, sends the data */ 
     UDR1 = data;
 }
+
+unsigned char USART_Receive( void ) {
+/* Wait for data to be received */ while ( !(UCSR1A & (1<<RXC)) );
+/* Get and return received data from buffer */ return UDR1;
+}
+
 //twiddles bit 3, PORTF creating the enable signal for the LCD
 void strobe_lcd(void){
     PORTF |= 0x08;
