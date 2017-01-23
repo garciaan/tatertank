@@ -115,6 +115,9 @@ int main(void){
     //string2lcd("Starting Program");
 
     _delay_ms(500);
+	read_data();
+	//while (nes_data[Start] == OFF);
+	USART_Transmit(Start);
     while(1){
 		clear_display();
 		read_data();
@@ -137,6 +140,18 @@ int main(void){
 		else if (nes_data[R] == ON){
 			fire();
             USART_Transmit(R);
+		}
+		else if (nes_data[X] == ON){
+			//USART_Transmit(X);
+		}
+		else if (nes_data[B] == ON){
+			//USART_Transmit(B);
+		}
+		else if (nes_data[Y] == ON){
+			USART_Transmit(Y);
+		}
+		else if (nes_data[A] == ON){
+			USART_Transmit(A);
 		}
 		else {
 			stop();

@@ -27,6 +27,10 @@
 #define DIRECTION12 (1 << 1)	//PORTE
 #define DIRECTION21 (1 << 2)	//PORTE
 #define DIRECTION22	(1 << 3)	//PORTE
+#define DIRECTION31 (1 << 5)	//PORTE
+#define DIRECTION32 (1 << 4)	//PORTE
+
+#define STEP_TIME 100
 
 //Other Outputs
 #define FIRE		(1 << 5)	//PORTB
@@ -60,6 +64,9 @@ void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
 unsigned char USART_Receive( void );
 char* USART_get_string(void);
+void USART0_INIT(unsigned int ubrr);
+void USART0_Transmit(unsigned char data);
+unsigned char USART0_Receive(void);
 void home_line2(void);
 void string2lcd(char *lcd_str);
 void strobe_lcd(void);
@@ -85,7 +92,10 @@ void left();
 void right();
 void stop();
 void fire();
-
+void lookUp();
+void lookDown();
+void stepUp();
+void stepDown();
 char nes_data[17];
 
 uint8_t temp, read_byte;
@@ -115,7 +125,7 @@ int main(void){
     string2lcd("Starting Program");
 
     _delay_ms(500);
-    while(1){
+	while(1){
         
 		clear_display();
         switch(USART_Receive()){
@@ -134,7 +144,19 @@ int main(void){
             case R:
                 fire();
                 break;
-            default:
+			case X:
+				lookUp();
+				break;
+			case B:
+				lookDown();
+				break;
+			case Y:
+				stepDown();
+				break;
+			case A:
+				stepUp();
+				break;
+			default:
                 stop();
                 break;
         }
@@ -147,10 +169,39 @@ int main(void){
 
 	return 0;
 }
+void stepUp(){
+	string2lcd("Step Up");
+	PORTE |= DIRECTION31;
+	PORTE &= ~DIRECTION32;
+	_delay_ms(STEP_TIME);
+	PORTE |= DIRECTION32;
+	_delay_ms(1000);
+}
+void stepDown(){
+	string2lcd("Step Down");
+	PORTE |= DIRECTION32;
+	PORTE &= ~DIRECTION31;
+	_delay_ms(STEP_TIME);
+	PORTE |= DIRECTION31;
+	_delay_ms(1000);
+}
+void lookUp(){
+	string2lcd("Look Up");
+	PORTE |= DIRECTION31;
+	PORTE &= ~DIRECTION32;
+	_delay_us(6);
+}
+void lookDown(){
+	string2lcd("Look Down");
+	PORTE |= DIRECTION32;
+	PORTE &= DIRECTION31;
+	_delay_us(6);
+}
 void fire(){
 	string2lcd("Firing");
+	
 	PORTB |= FIRE;
-	_delay_ms(200);
+	_delay_ms(600);
 	PORTB &= ~FIRE;
 }
 
@@ -170,16 +221,16 @@ void reverse(){
 	PORTE |= DIRECTION22;
 	_delay_us(6);
 }
-void right(){
-	string2lcd("Right");
+void left(){
+	string2lcd("Left");
 	PORTE |= DIRECTION11;
 	PORTE &= ~DIRECTION12;
 	PORTE &= ~DIRECTION21;
 	PORTE |= DIRECTION22;
 	_delay_us(6);
 }
-void left(){
-	string2lcd("Left");
+void right(){
+	string2lcd("right");
 	PORTE &= ~DIRECTION11;
 	PORTE |= DIRECTION12;
 	PORTE |= DIRECTION21;
@@ -192,6 +243,8 @@ void stop(){
 	PORTE |= DIRECTION12;
 	PORTE |= DIRECTION21;
 	PORTE |= DIRECTION22;
+	PORTE |= DIRECTION31;
+	PORTE |= DIRECTION32;
 	_delay_us(6);
 }
 
@@ -506,4 +559,25 @@ void lcd_init(void){
     while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
     strobe_lcd();
     _delay_us(37);
+}
+void USART0_INIT(unsigned int ubrr){
+    /* Set baud rate */
+    UBRR0H = (unsigned char)(ubrr>>8);
+    UBRR0L = (unsigned char)ubrr;
+    /* Enable receiver and transmitter */ 
+    UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+    /* Set frame format: 8data, 2stop bit */ 
+    UCSR0C = (1<<USBS0)|(3<<UCSZ01);
+}
+void USART0_Transmit(unsigned char data){
+    /* Wait for empty transmit buffer */ 
+    while ( !( UCSR0A & (1<<UDRE0)) );
+    /* Put data into buffer, sends the data */ 
+    UDR0 = data;
+}
+unsigned char USART0_Receive(void){
+    /* Wait for data to be received */ 
+    while ( !(UCSR0A & (1<<RXC)) );
+    /* Get and return received data from buffer */ 
+    return UDR0;
 }
