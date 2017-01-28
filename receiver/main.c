@@ -4,14 +4,6 @@
 #endif
 #define BAUD 1200
 #define UBRR 832
-#define P1 0x01
-#define P2 0x02
-#define P3 0x04
-#define P4 0x08
-#define P5 0x10
-#define P6 0x20
-#define P7 0x40
-#define P8 0x80
 
 //NES Controller
 #define LATCH	(1 << 7)	//PORTB
@@ -54,7 +46,6 @@ enum BUTTON {
 #include <avr/io.h>
 #include <util/delay.h>
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <avr/interrupt.h>
 
@@ -64,9 +55,6 @@ void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
 unsigned char USART_Receive( void );
 char* USART_get_string(void);
-void USART0_INIT(unsigned int ubrr);
-void USART0_Transmit(unsigned char data);
-unsigned char USART0_Receive(void);
 void home_line2(void);
 void string2lcd(char *lcd_str);
 void strobe_lcd(void);
@@ -76,10 +64,6 @@ void char2lcd(char a_char);
 void string2lcd(char *lcd_str);
 void spi_init(void);
 void lcd_init(void);
-void trigger(unsigned int pin);
-double get_distance(unsigned int pin);
-double print_distance(unsigned int pin);
-void blink(int led, int speed);
 void latch();
 void clk(int state);
 void read_data();
@@ -103,24 +87,26 @@ uint8_t temp, read_byte;
 
 
 int main(void){
-	DDRB = 0xFF;
-    PORTB = 0x00;
-    DDRD =0x00;
-    PORTD = 0x00;
-    DDRE = 0xFF;    //OUTPUTS
-	DDRF &= ~(1 << 0); // PORTF Pin 1 is input for data
+	DDRB = 0xFF;		//set PORTB to OUTPUTS
+    PORTB = 0x00;		//set all of portb to low
+    DDRD =0x00;			//Set portD to INPUTS
+    PORTD = 0x00;		//Set all of PORTD to low
+    DDRE = 0xFF;		//Set portE to OUTPUTS
+	DDRF &= ~(1 << 0);	// PORTF Pin 1 is input for data
 
 
-	char buffer[16];
     spi_init();
     lcd_init();
 	USART_Init(UBRR);
 	int i;
-    
+	
+	//Initialize the buffer to dashes for printing
     for (i = 0; i < 16; ++i){
         nes_data[i] = '-';
     }
+	//Set the end of the string
 	nes_data[16] = '\0';
+
     clear_display();
     string2lcd("Starting Program");
 
@@ -169,6 +155,12 @@ int main(void){
 
 	return 0;
 }
+
+
+/**************************
+*	Move the motor up for STEP_TIME milliseconds
+*	then pause for a second
+***************************/
 void stepUp(){
 	string2lcd("Step Up");
 	PORTE |= DIRECTION31;
@@ -177,6 +169,11 @@ void stepUp(){
 	PORTE |= DIRECTION32;
 	_delay_ms(1000);
 }
+
+/**************************
+*	Move the motor down for STEP_TIME milliseconds
+*	then pause for a second
+***************************/
 void stepDown(){
 	string2lcd("Step Down");
 	PORTE |= DIRECTION32;
@@ -185,18 +182,34 @@ void stepDown(){
 	PORTE |= DIRECTION31;
 	_delay_ms(1000);
 }
+
+
+
+/**************************
+*	Set the motor to move up 
+***************************/
 void lookUp(){
 	string2lcd("Look Up");
 	PORTE |= DIRECTION31;
 	PORTE &= ~DIRECTION32;
 	_delay_us(6);
 }
+
+
+/**************************
+*	Set the motor to move down
+***************************/
 void lookDown(){
 	string2lcd("Look Down");
 	PORTE |= DIRECTION32;
 	PORTE &= DIRECTION31;
 	_delay_us(6);
 }
+
+
+/**************************
+*	Sets the Fire pin high to release the solenoid	
+***************************/
 void fire(){
 	string2lcd("Firing");
 	
@@ -205,6 +218,11 @@ void fire(){
 	PORTB &= ~FIRE;
 }
 
+
+
+/**************************
+*	Sets both motors to foward
+***************************/
 void forward(){
 	string2lcd("Forward");
 	PORTE |= DIRECTION11;
@@ -213,6 +231,11 @@ void forward(){
 	PORTE &= ~DIRECTION22;
 	_delay_us(6);
 }
+
+
+/**************************
+*	Sets both motors to reverse
+***************************/
 void reverse(){
 	string2lcd("Reverse");
 	PORTE &= ~DIRECTION11;
@@ -221,6 +244,12 @@ void reverse(){
 	PORTE |= DIRECTION22;
 	_delay_us(6);
 }
+
+
+/**************************
+*	Sets left motor to forward 
+*	right motor to reverse
+***************************/
 void left(){
 	string2lcd("Left");
 	PORTE |= DIRECTION11;
@@ -229,6 +258,11 @@ void left(){
 	PORTE |= DIRECTION22;
 	_delay_us(6);
 }
+
+/**************************
+*	Sets right motor to forward
+*	left motor to reverse
+***************************/
 void right(){
 	string2lcd("right");
 	PORTE &= ~DIRECTION11;
@@ -237,6 +271,11 @@ void right(){
 	PORTE &= ~DIRECTION22;
 	_delay_us(6);
 }
+
+
+/**************************
+*	Sets both motors off
+***************************/
 void stop(){
 	string2lcd("Stop");
 	PORTE |= DIRECTION11;
@@ -248,34 +287,11 @@ void stop(){
 	_delay_us(6);
 }
 
+
+/**************************
+*	Print the controller data, button by button, to the LCD
+***************************/
 void print_nes(){
-	/*
-	//clear_display();
-	if (nes_data[A] == ON)
-		string2lcd("A");
-	if (nes_data[B] == ON)
-		string2lcd("B");
-	if (nes_data[Y] == ON)
-		string2lcd("Y");
-	if (nes_data[X] == ON)
-		string2lcd("X");
-	if (nes_data[Start] == ON)
-		string2lcd("S");
-	if (nes_data[Select] == ON)
-		string2lcd("E");
-	if (nes_data[Left] == ON)
-		string2lcd("L");
-	if (nes_data[Up] == ON)
-		string2lcd("U");
-	if (nes_data[Down] == ON)
-		string2lcd("D");
-	if (nes_data[Right] == ON)
-		string2lcd("R");
-	if (nes_data[R] == ON)
-		string2lcd("F");
-	if (nes_data[L] == ON)
-		string2lcd("C");
-	*/
 	char buttons[17];
 	int i;
 	for (i = 0; i < 16; ++i){
@@ -321,6 +337,14 @@ void print_nes(){
 	string2lcd(buttons);
 }
 
+
+/**************************
+*	Raises and lowers the latch pin 
+*	for the nes controller, which 
+*	grabs the newest data from the 
+*	nes controller and stores it in the
+*	shift register
+***************************/
 void latch(){
 	PORTB |= LATCH;
 	_delay_us(12);
@@ -328,6 +352,13 @@ void latch(){
 	_delay_us(6);
 }
 
+
+/**************************
+*	Sets the clock pin to state
+*	for the nes controller. This 
+*	tells the nes controller to 
+*	send the next bit (button state)
+***************************/
 void clk(int state){
 	if (state){
 		PORTB |= CLK;
@@ -338,6 +369,11 @@ void clk(int state){
 	_delay_us(6);
 }
 
+
+/**************************
+*	Get all data from the controller
+*	and store it in nes_data
+***************************/
 void read_data(){
 	int i;
 	latch();
@@ -355,80 +391,10 @@ void read_data(){
 	}
 
 }
-void blink(int led, int speed){
-    if (speed < 0){
-        speed = 0;
-    }
-    if (speed > 100){
-        speed = 100;
-    }
-    int i;
-    PORTB |= (1 << led);
-    for (i = 0; i < (121-speed); ++i){
-        _delay_ms(1);
-    }
-    PORTB &= ~(1 << led);
-    /*
-    int wait = 0;
-    int i;
-    if (speed <= 25){
-        wait = 100;
-    }
-    else if (speed > 25 && speed <= 50){
-        wait = 60;
-    }
-    else if (speed > 50 && speed <= 75){
-        wait = 30;
-    }
-    else {
-        wait = 10;
-    }
-    PORTB |= (1 << led);
-    for (i = 0; i < wait; ++i){
-        _delay_ms(1);
-    }
-    PORTB &= ~(1 << led);
-    */
-}
-double print_distance(unsigned int pin){
-    char str[16];
-    double distance = 0;
-    distance = get_distance(pin);
-    dtostrf(distance,1,6,str);
-    string2lcd(str);
-    return distance;
-}
 
-void trigger(unsigned int pin){
-    PORTE |= pin;
-    _delay_us(15);
-    PORTE &= ~pin;
-}
-
-double get_distance(unsigned int pin){
-    double distance = 0;
-    int count = 0;
-    trigger(pin);
-    while ((PINE & (pin << 1)) == 0); //while pinc port 1 is low, aka wait for echo to raise
-    while (1){
-        if ((PINE & (pin << 1)) != (pin << 1)){ //wait for pinc port 1 to go back to low
-            break;
-        }
-        if (count == 255){
-            break;
-        }
-        _delay_us(50);
-        ++count;
-    }
-
-    distance = (double)count * 40;
-    distance /= 58;
-
-
-    return distance;
-}
-
-
+/**************************
+*	Initializes uart1 with the given ubrr
+***************************/
 void USART_Init( unsigned int ubrr ) {
     /* Set baud rate */
     UBRR1H = (unsigned char)(ubrr>>8);
@@ -438,6 +404,11 @@ void USART_Init( unsigned int ubrr ) {
     /* Set frame format: 8data, 2stop bit */ 
     UCSR1C = (1<<USBS1)|(3<<UCSZ01);
 }
+
+
+/**************************
+*	Transmits the given byte over uart1
+***************************/
 void USART_Transmit( unsigned char data ) {
     /* Wait for empty transmit buffer */ 
     while ( !( UCSR1A & (1<<UDRE1)) );
@@ -445,9 +416,20 @@ void USART_Transmit( unsigned char data ) {
     UDR1 = data;
 }
 
+
+/**************************
+*	Wait for data to be received, then
+*	return the data from UDR1
+***************************/
 unsigned char USART_Receive( void ) {
-/* Wait for data to be received */ //while ( !(UCSR1A & (1<<RXC)) );
-/* Get and return received data from buffer */ return UDR1;
+	/* Wait for data to be received */ //
+	while ( !(UCSR1A & (1<<RXC)) ){
+		clear_display();
+		stop();
+	}
+	/* Get and return received data from buffer */ 
+	
+	return UDR1;
 }
 
 //twiddles bit 3, PORTF creating the enable signal for the LCD
@@ -559,25 +541,4 @@ void lcd_init(void){
     while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
     strobe_lcd();
     _delay_us(37);
-}
-void USART0_INIT(unsigned int ubrr){
-    /* Set baud rate */
-    UBRR0H = (unsigned char)(ubrr>>8);
-    UBRR0L = (unsigned char)ubrr;
-    /* Enable receiver and transmitter */ 
-    UCSR0B = (1<<RXEN0)|(1<<TXEN0);
-    /* Set frame format: 8data, 2stop bit */ 
-    UCSR0C = (1<<USBS0)|(3<<UCSZ01);
-}
-void USART0_Transmit(unsigned char data){
-    /* Wait for empty transmit buffer */ 
-    while ( !( UCSR0A & (1<<UDRE0)) );
-    /* Put data into buffer, sends the data */ 
-    UDR0 = data;
-}
-unsigned char USART0_Receive(void){
-    /* Wait for data to be received */ 
-    while ( !(UCSR0A & (1<<RXC)) );
-    /* Get and return received data from buffer */ 
-    return UDR0;
 }
