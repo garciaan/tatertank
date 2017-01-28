@@ -4,6 +4,8 @@
 #endif
 #define BAUD 1200
 #define UBRR 832
+#define BLUETOOTH_BAUD 9600
+#define BLUETOOTH_UBRR F_CPU/16/BLUETOOTH_BAUD-1
 
 //NES Controller
 #define LATCH	(1 << 7)	//PORTB
@@ -50,10 +52,10 @@ enum BUTTON {
 #include <avr/interrupt.h>
 
 
-
 void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
 unsigned char USART_Receive( void );
+void USART_send_string(char *data);
 char* USART_get_string(void);
 void home_line2(void);
 void string2lcd(char *lcd_str);
@@ -89,15 +91,15 @@ uint8_t temp, read_byte;
 int main(void){
 	DDRB = 0xFF;		//set PORTB to OUTPUTS
     PORTB = 0x00;		//set all of portb to low
-    DDRD =0x00;			//Set portD to INPUTS
-    PORTD = 0x00;		//Set all of PORTD to low
+    //DDRD =0x00;			//Set portD to INPUTS
+    //PORTD = 0x00;		//Set all of PORTD to low
     DDRE = 0xFF;		//Set portE to OUTPUTS
 	DDRF &= ~(1 << 0);	// PORTF Pin 1 is input for data
 
 
     spi_init();
     lcd_init();
-	USART_Init(UBRR);
+	USART_Init(BLUETOOTH_UBRR);
 	int i;
 	
 	//Initialize the buffer to dashes for printing
@@ -109,47 +111,16 @@ int main(void){
 
     clear_display();
     string2lcd("Starting Program");
-
+	char a = 'a';
     _delay_ms(500);
 	while(1){
         
 		clear_display();
-        switch(USART_Receive()){
-            case Up:
-                forward();
-                break;
-            case Down:
-                reverse();
-                break;
-            case Right:
-                right();
-                break;
-            case Left:
-                left();
-                break;
-            case R:
-                fire();
-                break;
-			case X:
-				lookUp();
-				break;
-			case B:
-				lookDown();
-				break;
-			case Y:
-				stepDown();
-				break;
-			case A:
-				stepUp();
-				break;
-			default:
-                stop();
-                break;
-        }
-    
-		
-		_delay_ms(60);
-		
+		USART_Transmit('a');
+		a = USART_Receive();
+		nes_data[1] = a;
+		string2lcd(nes_data);
+		_delay_ms(100);
         
 	}
 
@@ -401,8 +372,8 @@ void USART_Init( unsigned int ubrr ) {
     UBRR1L = (unsigned char)ubrr;
     /* Enable receiver and transmitter */ 
     UCSR1B = (1<<RXEN1)|(1<<TXEN1);
-    /* Set frame format: 8data, 2stop bit */ 
-    UCSR1C = (1<<USBS1)|(3<<UCSZ01);
+    /* Set frame format: 9data, 1stop bit */ 
+    UCSR1C = (1 << UCSZ12) | (1 << UCSZ11) | (1 << UCSZ10);
 }
 
 
@@ -423,16 +394,20 @@ void USART_Transmit( unsigned char data ) {
 ***************************/
 unsigned char USART_Receive( void ) {
 	/* Wait for data to be received */ //
-	while ( !(UCSR1A & (1<<RXC)) ){
-		clear_display();
-		stop();
-		_delay_ms(50);
+	while ( !(UCSR1A & (1<<RXC1)) ){
 	}
 	/* Get and return received data from buffer */ 
 	
 	return UDR1;
 }
 
+void USART_send_string(char *data){
+	int i = 0;
+	while (data[i] != '\0'){
+		USART_Transmit(data[i]);
+		++i;
+	}
+}
 //twiddles bit 3, PORTF creating the enable signal for the LCD
 void strobe_lcd(void){
     PORTF |= 0x08;
@@ -446,7 +421,7 @@ void clear_display(void){
     SPDR = 0x01;    //clear display command
     while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
     strobe_lcd();   //strobe the LCD enable pin
-    _delay_ms(1.6);   //obligatory waiting for slow LCD
+    _delay_ms(2.6);   //obligatory waiting for slow LCD
 }
 
 void home_line2(void){

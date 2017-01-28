@@ -1,0 +1,1551 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000005c  00800100  000006a2  00000736  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000006a2  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000013  0080015c  0080015c  00000792  2**0
+                  ALLOC
+  3 .stab         00001c74  00000000  00000000  00000794  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00001214  00000000  00000000  00002408  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      00000011  00000000  00000000  0000361c  2**0
+                  CONTENTS, READONLY
+  6 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00003630  2**2
+                  CONTENTS, READONLY
+  7 .debug_info   00000780  00000000  00000000  0000366c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000718  00000000  00000000  00003dec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000001d  00000000  00000000  00004504  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000027d  00000000  00000000  00004521  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 46 00 	jmp	0x8c	; 0x8c <__ctors_end>
+   4:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+   8:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+   c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  10:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  14:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  18:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  1c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  20:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  24:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  28:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  2c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  30:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  34:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  38:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  3c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  40:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  44:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  48:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  4c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  50:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  54:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  58:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  5c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  60:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  64:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  68:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  6c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  70:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  74:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  78:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  7c:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  80:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  84:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+  88:	0c 94 65 00 	jmp	0xca	; 0xca <__bad_interrupt>
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e2 ea       	ldi	r30, 0xA2	; 162
+  a0:	f6 e0       	ldi	r31, 0x06	; 6
+  a2:	00 e0       	ldi	r16, 0x00	; 0
+  a4:	0b bf       	out	0x3b, r16	; 59
+  a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
+  a8:	07 90       	elpm	r0, Z+
+  aa:	0d 92       	st	X+, r0
+  ac:	ac 35       	cpi	r26, 0x5C	; 92
+  ae:	b1 07       	cpc	r27, r17
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
+
+000000b2 <__do_clear_bss>:
+  b2:	21 e0       	ldi	r18, 0x01	; 1
+  b4:	ac e5       	ldi	r26, 0x5C	; 92
+  b6:	b1 e0       	ldi	r27, 0x01	; 1
+  b8:	01 c0       	rjmp	.+2      	; 0xbc <.do_clear_bss_start>
+
+000000ba <.do_clear_bss_loop>:
+  ba:	1d 92       	st	X+, r1
+
+000000bc <.do_clear_bss_start>:
+  bc:	af 36       	cpi	r26, 0x6F	; 111
+  be:	b2 07       	cpc	r27, r18
+  c0:	e1 f7       	brne	.-8      	; 0xba <.do_clear_bss_loop>
+  c2:	0e 94 f3 02 	call	0x5e6	; 0x5e6 <main>
+  c6:	0c 94 4f 03 	jmp	0x69e	; 0x69e <_exit>
+
+000000ca <__bad_interrupt>:
+  ca:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ce <latch>:
+*	grabs the newest data from the 
+*	nes controller and stores it in the
+*	shift register
+***************************/
+void latch(){
+	PORTB |= LATCH;
+  ce:	c7 9a       	sbi	0x18, 7	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  d0:	80 e4       	ldi	r24, 0x40	; 64
+  d2:	8a 95       	dec	r24
+  d4:	f1 f7       	brne	.-4      	; 0xd2 <latch+0x4>
+	_delay_us(12);
+	PORTB &= ~LATCH;
+  d6:	c7 98       	cbi	0x18, 7	; 24
+  d8:	80 e2       	ldi	r24, 0x20	; 32
+  da:	8a 95       	dec	r24
+  dc:	f1 f7       	brne	.-4      	; 0xda <latch+0xc>
+  de:	08 95       	ret
+
+000000e0 <clk>:
+*	for the nes controller. This 
+*	tells the nes controller to 
+*	send the next bit (button state)
+***************************/
+void clk(int state){
+	if (state){
+  e0:	89 2b       	or	r24, r25
+  e2:	29 f4       	brne	.+10     	; 0xee <clk+0xe>
+		PORTB |= CLK;
+	}
+	else {
+		PORTB &= ~CLK;
+  e4:	c6 98       	cbi	0x18, 6	; 24
+  e6:	80 e2       	ldi	r24, 0x20	; 32
+  e8:	8a 95       	dec	r24
+  ea:	f1 f7       	brne	.-4      	; 0xe8 <clk+0x8>
+  ec:	08 95       	ret
+*	tells the nes controller to 
+*	send the next bit (button state)
+***************************/
+void clk(int state){
+	if (state){
+		PORTB |= CLK;
+  ee:	c6 9a       	sbi	0x18, 6	; 24
+  f0:	80 e2       	ldi	r24, 0x20	; 32
+  f2:	8a 95       	dec	r24
+  f4:	f1 f7       	brne	.-4      	; 0xf2 <clk+0x12>
+  f6:	08 95       	ret
+
+000000f8 <read_data>:
+*	grabs the newest data from the 
+*	nes controller and stores it in the
+*	shift register
+***************************/
+void latch(){
+	PORTB |= LATCH;
+  f8:	c7 9a       	sbi	0x18, 7	; 24
+  fa:	40 e4       	ldi	r20, 0x40	; 64
+  fc:	4a 95       	dec	r20
+  fe:	f1 f7       	brne	.-4      	; 0xfc <read_data+0x4>
+	_delay_us(12);
+	PORTB &= ~LATCH;
+ 100:	c7 98       	cbi	0x18, 7	; 24
+ 102:	80 e2       	ldi	r24, 0x20	; 32
+ 104:	8a 95       	dec	r24
+ 106:	f1 f7       	brne	.-4      	; 0x104 <read_data+0xc>
+ 108:	ee e5       	ldi	r30, 0x5E	; 94
+ 10a:	f1 e0       	ldi	r31, 0x01	; 1
+*	and store it in nes_data
+***************************/
+void read_data(){
+	int i;
+	latch();
+	for (i = 0; i < 16; ++i){
+ 10c:	80 e0       	ldi	r24, 0x00	; 0
+ 10e:	90 e0       	ldi	r25, 0x00	; 0
+		if (i <= 11){
+			if (~PINF & DATA){
+				nes_data[i] = ON;
+			}
+			else {
+				nes_data[i] = OFF;
+ 110:	30 e3       	ldi	r19, 0x30	; 48
+	latch();
+	for (i = 0; i < 16; ++i){
+		clk(LOW);
+		if (i <= 11){
+			if (~PINF & DATA){
+				nes_data[i] = ON;
+ 112:	21 e3       	ldi	r18, 0x31	; 49
+ 114:	0a c0       	rjmp	.+20     	; 0x12a <read_data+0x32>
+ 116:	20 83       	st	Z, r18
+*	tells the nes controller to 
+*	send the next bit (button state)
+***************************/
+void clk(int state){
+	if (state){
+		PORTB |= CLK;
+ 118:	c6 9a       	sbi	0x18, 6	; 24
+ 11a:	40 e2       	ldi	r20, 0x20	; 32
+ 11c:	4a 95       	dec	r20
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <read_data+0x24>
+*	and store it in nes_data
+***************************/
+void read_data(){
+	int i;
+	latch();
+	for (i = 0; i < 16; ++i){
+ 120:	01 96       	adiw	r24, 0x01	; 1
+ 122:	31 96       	adiw	r30, 0x01	; 1
+ 124:	80 31       	cpi	r24, 0x10	; 16
+ 126:	91 05       	cpc	r25, r1
+ 128:	59 f0       	breq	.+22     	; 0x140 <read_data+0x48>
+void clk(int state){
+	if (state){
+		PORTB |= CLK;
+	}
+	else {
+		PORTB &= ~CLK;
+ 12a:	c6 98       	cbi	0x18, 6	; 24
+ 12c:	40 e2       	ldi	r20, 0x20	; 32
+ 12e:	4a 95       	dec	r20
+ 130:	f1 f7       	brne	.-4      	; 0x12e <read_data+0x36>
+void read_data(){
+	int i;
+	latch();
+	for (i = 0; i < 16; ++i){
+		clk(LOW);
+		if (i <= 11){
+ 132:	8c 30       	cpi	r24, 0x0C	; 12
+ 134:	91 05       	cpc	r25, r1
+ 136:	84 f7       	brge	.-32     	; 0x118 <read_data+0x20>
+			if (~PINF & DATA){
+ 138:	00 9b       	sbis	0x00, 0	; 0
+ 13a:	ed cf       	rjmp	.-38     	; 0x116 <read_data+0x1e>
+				nes_data[i] = ON;
+			}
+			else {
+				nes_data[i] = OFF;
+ 13c:	30 83       	st	Z, r19
+ 13e:	ec cf       	rjmp	.-40     	; 0x118 <read_data+0x20>
+			}
+		}
+		clk(HIGH);
+	}
+
+}
+ 140:	08 95       	ret
+
+00000142 <USART_Init>:
+/**************************
+*	Initializes uart1 with the given ubrr
+***************************/
+void USART_Init( unsigned int ubrr ) {
+    /* Set baud rate */
+    UBRR1H = (unsigned char)(ubrr>>8);
+ 142:	90 93 98 00 	sts	0x0098, r25
+    UBRR1L = (unsigned char)ubrr;
+ 146:	80 93 99 00 	sts	0x0099, r24
+    /* Enable receiver and transmitter */ 
+    UCSR1B = (1<<RXEN1)|(1<<TXEN1);
+ 14a:	88 e1       	ldi	r24, 0x18	; 24
+ 14c:	80 93 9a 00 	sts	0x009A, r24
+    /* Set frame format: 9data, 1stop bit */ 
+    UCSR1C = (1 << UCSZ12) | (1 << UCSZ11) | (1 << UCSZ10);
+ 150:	86 e0       	ldi	r24, 0x06	; 6
+ 152:	80 93 9d 00 	sts	0x009D, r24
+ 156:	08 95       	ret
+
+00000158 <USART_Transmit>:
+/**************************
+*	Transmits the given byte over uart1
+***************************/
+void USART_Transmit( unsigned char data ) {
+    /* Wait for empty transmit buffer */ 
+    while ( !( UCSR1A & (1<<UDRE1)) );
+ 158:	90 91 9b 00 	lds	r25, 0x009B
+ 15c:	95 ff       	sbrs	r25, 5
+ 15e:	fc cf       	rjmp	.-8      	; 0x158 <USART_Transmit>
+    /* Put data into buffer, sends the data */ 
+    UDR1 = data;
+ 160:	80 93 9c 00 	sts	0x009C, r24
+ 164:	08 95       	ret
+
+00000166 <USART_Receive>:
+*	Wait for data to be received, then
+*	return the data from UDR1
+***************************/
+unsigned char USART_Receive( void ) {
+	/* Wait for data to be received */ //
+	while ( !(UCSR1A & (1<<RXC1)) ){
+ 166:	80 91 9b 00 	lds	r24, 0x009B
+ 16a:	87 ff       	sbrs	r24, 7
+ 16c:	fc cf       	rjmp	.-8      	; 0x166 <USART_Receive>
+	}
+	/* Get and return received data from buffer */ 
+	
+	return UDR1;
+ 16e:	80 91 9c 00 	lds	r24, 0x009C
+}
+ 172:	08 95       	ret
+
+00000174 <USART_send_string>:
+
+void USART_send_string(char *data){
+	int i = 0;
+	while (data[i] != '\0'){
+ 174:	fc 01       	movw	r30, r24
+ 176:	20 81       	ld	r18, Z
+ 178:	22 23       	and	r18, r18
+ 17a:	51 f0       	breq	.+20     	; 0x190 <USART_send_string+0x1c>
+ 17c:	31 96       	adiw	r30, 0x01	; 1
+/**************************
+*	Transmits the given byte over uart1
+***************************/
+void USART_Transmit( unsigned char data ) {
+    /* Wait for empty transmit buffer */ 
+    while ( !( UCSR1A & (1<<UDRE1)) );
+ 17e:	90 91 9b 00 	lds	r25, 0x009B
+ 182:	95 ff       	sbrs	r25, 5
+ 184:	fc cf       	rjmp	.-8      	; 0x17e <USART_send_string+0xa>
+    /* Put data into buffer, sends the data */ 
+    UDR1 = data;
+ 186:	20 93 9c 00 	sts	0x009C, r18
+	return UDR1;
+}
+
+void USART_send_string(char *data){
+	int i = 0;
+	while (data[i] != '\0'){
+ 18a:	21 91       	ld	r18, Z+
+ 18c:	21 11       	cpse	r18, r1
+ 18e:	f7 cf       	rjmp	.-18     	; 0x17e <USART_send_string+0xa>
+ 190:	08 95       	ret
+
+00000192 <strobe_lcd>:
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 192:	e2 e6       	ldi	r30, 0x62	; 98
+ 194:	f0 e0       	ldi	r31, 0x00	; 0
+ 196:	80 81       	ld	r24, Z
+ 198:	88 60       	ori	r24, 0x08	; 8
+ 19a:	80 83       	st	Z, r24
+    PORTF &= ~0x08;
+ 19c:	80 81       	ld	r24, Z
+ 19e:	87 7f       	andi	r24, 0xF7	; 247
+ 1a0:	80 83       	st	Z, r24
+ 1a2:	08 95       	ret
+
+000001a4 <clear_display>:
+}
+
+void clear_display(void){
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 1a4:	77 9b       	sbis	0x0e, 7	; 14
+ 1a6:	fe cf       	rjmp	.-4      	; 0x1a4 <clear_display>
+    SPDR = 0x00;    //command, not data
+ 1a8:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 1aa:	77 9b       	sbis	0x0e, 7	; 14
+ 1ac:	fe cf       	rjmp	.-4      	; 0x1aa <clear_display+0x6>
+    SPDR = 0x01;    //clear display command
+ 1ae:	81 e0       	ldi	r24, 0x01	; 1
+ 1b0:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 1b2:	77 9b       	sbis	0x0e, 7	; 14
+ 1b4:	fe cf       	rjmp	.-4      	; 0x1b2 <clear_display+0xe>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 1b6:	80 91 62 00 	lds	r24, 0x0062
+ 1ba:	88 60       	ori	r24, 0x08	; 8
+ 1bc:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 1c0:	80 91 62 00 	lds	r24, 0x0062
+ 1c4:	87 7f       	andi	r24, 0xF7	; 247
+ 1c6:	80 93 62 00 	sts	0x0062, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1ca:	8f e9       	ldi	r24, 0x9F	; 159
+ 1cc:	98 e2       	ldi	r25, 0x28	; 40
+ 1ce:	01 97       	sbiw	r24, 0x01	; 1
+ 1d0:	f1 f7       	brne	.-4      	; 0x1ce <clear_display+0x2a>
+ 1d2:	00 c0       	rjmp	.+0      	; 0x1d4 <clear_display+0x30>
+ 1d4:	00 00       	nop
+ 1d6:	08 95       	ret
+
+000001d8 <home_line2>:
+    strobe_lcd();   //strobe the LCD enable pin
+    _delay_ms(2.6);   //obligatory waiting for slow LCD
+}
+
+void home_line2(void){
+    SPDR = 0x00;    //command, not data
+ 1d8:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 1da:	77 9b       	sbis	0x0e, 7	; 14
+ 1dc:	fe cf       	rjmp	.-4      	; 0x1da <home_line2+0x2>
+    SPDR = 0xC0;   // cursor go home on line 2
+ 1de:	80 ec       	ldi	r24, 0xC0	; 192
+ 1e0:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 1e2:	77 9b       	sbis	0x0e, 7	; 14
+ 1e4:	fe cf       	rjmp	.-4      	; 0x1e2 <home_line2+0xa>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 1e6:	80 91 62 00 	lds	r24, 0x0062
+ 1ea:	88 60       	ori	r24, 0x08	; 8
+ 1ec:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 1f0:	80 91 62 00 	lds	r24, 0x0062
+ 1f4:	87 7f       	andi	r24, 0xF7	; 247
+ 1f6:	80 93 62 00 	sts	0x0062, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1fa:	85 ec       	ldi	r24, 0xC5	; 197
+ 1fc:	8a 95       	dec	r24
+ 1fe:	f1 f7       	brne	.-4      	; 0x1fc <home_line2+0x24>
+ 200:	00 00       	nop
+ 202:	08 95       	ret
+
+00000204 <char2lcd>:
+
+//sends a char to the LCD
+void char2lcd(char a_char){
+    //sends a char to the LCD
+    //usage: char2lcd('H');  // send an H to the LCD
+    SPDR = 0x01;   //set SR for data xfer with LSB=1
+ 204:	91 e0       	ldi	r25, 0x01	; 1
+ 206:	9f b9       	out	0x0f, r25	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 208:	77 9b       	sbis	0x0e, 7	; 14
+ 20a:	fe cf       	rjmp	.-4      	; 0x208 <char2lcd+0x4>
+    SPDR = a_char; //send the char to the SPI port
+ 20c:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 20e:	77 9b       	sbis	0x0e, 7	; 14
+ 210:	fe cf       	rjmp	.-4      	; 0x20e <char2lcd+0xa>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 212:	80 91 62 00 	lds	r24, 0x0062
+ 216:	88 60       	ori	r24, 0x08	; 8
+ 218:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 21c:	80 91 62 00 	lds	r24, 0x0062
+ 220:	87 7f       	andi	r24, 0xF7	; 247
+ 222:	80 93 62 00 	sts	0x0062, r24
+ 226:	85 ec       	ldi	r24, 0xC5	; 197
+ 228:	8a 95       	dec	r24
+ 22a:	f1 f7       	brne	.-4      	; 0x228 <char2lcd+0x24>
+ 22c:	00 00       	nop
+ 22e:	08 95       	ret
+
+00000230 <string2lcd>:
+    strobe_lcd();  //toggle the enable bit
+    _delay_us(37);
+}
+
+//sends a string in FLASH to LCD
+void string2lcd(char *lcd_str){
+ 230:	cf 93       	push	r28
+ 232:	df 93       	push	r29
+ 234:	fc 01       	movw	r30, r24
+ 236:	dc 01       	movw	r26, r24
+    int count;
+    for (count=0; count<=(strlen(lcd_str)-1); count++){
+ 238:	40 e0       	ldi	r20, 0x00	; 0
+ 23a:	50 e0       	ldi	r21, 0x00	; 0
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+        SPDR = 0x01; //set SR for data
+ 23c:	61 e0       	ldi	r22, 0x01	; 1
+
+//sends a string in FLASH to LCD
+void string2lcd(char *lcd_str){
+    int count;
+    for (count=0; count<=(strlen(lcd_str)-1); count++){
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 23e:	77 9b       	sbis	0x0e, 7	; 14
+ 240:	fe cf       	rjmp	.-4      	; 0x23e <string2lcd+0xe>
+        SPDR = 0x01; //set SR for data
+ 242:	6f b9       	out	0x0f, r22	; 15
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 244:	77 9b       	sbis	0x0e, 7	; 14
+ 246:	fe cf       	rjmp	.-4      	; 0x244 <string2lcd+0x14>
+        SPDR = lcd_str[count]; 
+ 248:	8d 91       	ld	r24, X+
+ 24a:	8f b9       	out	0x0f, r24	; 15
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 24c:	77 9b       	sbis	0x0e, 7	; 14
+ 24e:	fe cf       	rjmp	.-4      	; 0x24c <string2lcd+0x1c>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 250:	90 91 62 00 	lds	r25, 0x0062
+ 254:	98 60       	ori	r25, 0x08	; 8
+ 256:	90 93 62 00 	sts	0x0062, r25
+    PORTF &= ~0x08;
+ 25a:	90 91 62 00 	lds	r25, 0x0062
+ 25e:	97 7f       	andi	r25, 0xF7	; 247
+ 260:	90 93 62 00 	sts	0x0062, r25
+ 264:	85 ec       	ldi	r24, 0xC5	; 197
+ 266:	8a 95       	dec	r24
+ 268:	f1 f7       	brne	.-4      	; 0x266 <string2lcd+0x36>
+ 26a:	00 00       	nop
+}
+
+//sends a string in FLASH to LCD
+void string2lcd(char *lcd_str){
+    int count;
+    for (count=0; count<=(strlen(lcd_str)-1); count++){
+ 26c:	4f 5f       	subi	r20, 0xFF	; 255
+ 26e:	5f 4f       	sbci	r21, 0xFF	; 255
+ 270:	ef 01       	movw	r28, r30
+ 272:	09 90       	ld	r0, Y+
+ 274:	00 20       	and	r0, r0
+ 276:	e9 f7       	brne	.-6      	; 0x272 <string2lcd+0x42>
+ 278:	9e 01       	movw	r18, r28
+ 27a:	2e 1b       	sub	r18, r30
+ 27c:	3f 0b       	sbc	r19, r31
+ 27e:	22 50       	subi	r18, 0x02	; 2
+ 280:	31 09       	sbc	r19, r1
+ 282:	24 17       	cp	r18, r20
+ 284:	35 07       	cpc	r19, r21
+ 286:	d8 f6       	brcc	.-74     	; 0x23e <string2lcd+0xe>
+        SPDR = lcd_str[count]; 
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+        strobe_lcd();
+        _delay_us(37);  // Max delay for this function is 48us
+    }
+}   
+ 288:	df 91       	pop	r29
+ 28a:	cf 91       	pop	r28
+ 28c:	08 95       	ret
+
+0000028e <stepUp>:
+/**************************
+*	Move the motor up for STEP_TIME milliseconds
+*	then pause for a second
+***************************/
+void stepUp(){
+	string2lcd("Step Up");
+ 28e:	80 e0       	ldi	r24, 0x00	; 0
+ 290:	91 e0       	ldi	r25, 0x01	; 1
+ 292:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION31;
+ 296:	1d 9a       	sbi	0x03, 5	; 3
+	PORTE &= ~DIRECTION32;
+ 298:	1c 98       	cbi	0x03, 4	; 3
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 29a:	2f ef       	ldi	r18, 0xFF	; 255
+ 29c:	81 ee       	ldi	r24, 0xE1	; 225
+ 29e:	94 e0       	ldi	r25, 0x04	; 4
+ 2a0:	21 50       	subi	r18, 0x01	; 1
+ 2a2:	80 40       	sbci	r24, 0x00	; 0
+ 2a4:	90 40       	sbci	r25, 0x00	; 0
+ 2a6:	e1 f7       	brne	.-8      	; 0x2a0 <stepUp+0x12>
+ 2a8:	00 c0       	rjmp	.+0      	; 0x2aa <stepUp+0x1c>
+ 2aa:	00 00       	nop
+	_delay_ms(STEP_TIME);
+	PORTE |= DIRECTION32;
+ 2ac:	1c 9a       	sbi	0x03, 4	; 3
+ 2ae:	2f ef       	ldi	r18, 0xFF	; 255
+ 2b0:	83 ed       	ldi	r24, 0xD3	; 211
+ 2b2:	90 e3       	ldi	r25, 0x30	; 48
+ 2b4:	21 50       	subi	r18, 0x01	; 1
+ 2b6:	80 40       	sbci	r24, 0x00	; 0
+ 2b8:	90 40       	sbci	r25, 0x00	; 0
+ 2ba:	e1 f7       	brne	.-8      	; 0x2b4 <stepUp+0x26>
+ 2bc:	00 c0       	rjmp	.+0      	; 0x2be <stepUp+0x30>
+ 2be:	00 00       	nop
+ 2c0:	08 95       	ret
+
+000002c2 <stepDown>:
+/**************************
+*	Move the motor down for STEP_TIME milliseconds
+*	then pause for a second
+***************************/
+void stepDown(){
+	string2lcd("Step Down");
+ 2c2:	88 e0       	ldi	r24, 0x08	; 8
+ 2c4:	91 e0       	ldi	r25, 0x01	; 1
+ 2c6:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION32;
+ 2ca:	1c 9a       	sbi	0x03, 4	; 3
+	PORTE &= ~DIRECTION31;
+ 2cc:	1d 98       	cbi	0x03, 5	; 3
+ 2ce:	2f ef       	ldi	r18, 0xFF	; 255
+ 2d0:	81 ee       	ldi	r24, 0xE1	; 225
+ 2d2:	94 e0       	ldi	r25, 0x04	; 4
+ 2d4:	21 50       	subi	r18, 0x01	; 1
+ 2d6:	80 40       	sbci	r24, 0x00	; 0
+ 2d8:	90 40       	sbci	r25, 0x00	; 0
+ 2da:	e1 f7       	brne	.-8      	; 0x2d4 <stepDown+0x12>
+ 2dc:	00 c0       	rjmp	.+0      	; 0x2de <stepDown+0x1c>
+ 2de:	00 00       	nop
+	_delay_ms(STEP_TIME);
+	PORTE |= DIRECTION31;
+ 2e0:	1d 9a       	sbi	0x03, 5	; 3
+ 2e2:	2f ef       	ldi	r18, 0xFF	; 255
+ 2e4:	83 ed       	ldi	r24, 0xD3	; 211
+ 2e6:	90 e3       	ldi	r25, 0x30	; 48
+ 2e8:	21 50       	subi	r18, 0x01	; 1
+ 2ea:	80 40       	sbci	r24, 0x00	; 0
+ 2ec:	90 40       	sbci	r25, 0x00	; 0
+ 2ee:	e1 f7       	brne	.-8      	; 0x2e8 <stepDown+0x26>
+ 2f0:	00 c0       	rjmp	.+0      	; 0x2f2 <stepDown+0x30>
+ 2f2:	00 00       	nop
+ 2f4:	08 95       	ret
+
+000002f6 <lookUp>:
+
+/**************************
+*	Set the motor to move up 
+***************************/
+void lookUp(){
+	string2lcd("Look Up");
+ 2f6:	82 e1       	ldi	r24, 0x12	; 18
+ 2f8:	91 e0       	ldi	r25, 0x01	; 1
+ 2fa:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION31;
+ 2fe:	1d 9a       	sbi	0x03, 5	; 3
+	PORTE &= ~DIRECTION32;
+ 300:	1c 98       	cbi	0x03, 4	; 3
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 302:	80 e2       	ldi	r24, 0x20	; 32
+ 304:	8a 95       	dec	r24
+ 306:	f1 f7       	brne	.-4      	; 0x304 <lookUp+0xe>
+ 308:	08 95       	ret
+
+0000030a <lookDown>:
+
+/**************************
+*	Set the motor to move down
+***************************/
+void lookDown(){
+	string2lcd("Look Down");
+ 30a:	8a e1       	ldi	r24, 0x1A	; 26
+ 30c:	91 e0       	ldi	r25, 0x01	; 1
+ 30e:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION32;
+ 312:	1c 9a       	sbi	0x03, 4	; 3
+	PORTE &= DIRECTION31;
+ 314:	83 b1       	in	r24, 0x03	; 3
+ 316:	80 72       	andi	r24, 0x20	; 32
+ 318:	83 b9       	out	0x03, r24	; 3
+ 31a:	80 e2       	ldi	r24, 0x20	; 32
+ 31c:	8a 95       	dec	r24
+ 31e:	f1 f7       	brne	.-4      	; 0x31c <lookDown+0x12>
+ 320:	08 95       	ret
+
+00000322 <fire>:
+
+/**************************
+*	Sets the Fire pin high to release the solenoid	
+***************************/
+void fire(){
+	string2lcd("Firing");
+ 322:	84 e2       	ldi	r24, 0x24	; 36
+ 324:	91 e0       	ldi	r25, 0x01	; 1
+ 326:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	
+	PORTB |= FIRE;
+ 32a:	c5 9a       	sbi	0x18, 5	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 32c:	2f ef       	ldi	r18, 0xFF	; 255
+ 32e:	8b e4       	ldi	r24, 0x4B	; 75
+ 330:	9d e1       	ldi	r25, 0x1D	; 29
+ 332:	21 50       	subi	r18, 0x01	; 1
+ 334:	80 40       	sbci	r24, 0x00	; 0
+ 336:	90 40       	sbci	r25, 0x00	; 0
+ 338:	e1 f7       	brne	.-8      	; 0x332 <fire+0x10>
+ 33a:	00 c0       	rjmp	.+0      	; 0x33c <fire+0x1a>
+ 33c:	00 00       	nop
+	_delay_ms(600);
+	PORTB &= ~FIRE;
+ 33e:	c5 98       	cbi	0x18, 5	; 24
+ 340:	08 95       	ret
+
+00000342 <forward>:
+
+/**************************
+*	Sets both motors to foward
+***************************/
+void forward(){
+	string2lcd("Forward");
+ 342:	8b e2       	ldi	r24, 0x2B	; 43
+ 344:	91 e0       	ldi	r25, 0x01	; 1
+ 346:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION11;
+ 34a:	18 9a       	sbi	0x03, 0	; 3
+	PORTE &= ~DIRECTION12;
+ 34c:	19 98       	cbi	0x03, 1	; 3
+	PORTE |= DIRECTION21;
+ 34e:	1a 9a       	sbi	0x03, 2	; 3
+	PORTE &= ~DIRECTION22;
+ 350:	1b 98       	cbi	0x03, 3	; 3
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 352:	80 e2       	ldi	r24, 0x20	; 32
+ 354:	8a 95       	dec	r24
+ 356:	f1 f7       	brne	.-4      	; 0x354 <forward+0x12>
+ 358:	08 95       	ret
+
+0000035a <reverse>:
+
+/**************************
+*	Sets both motors to reverse
+***************************/
+void reverse(){
+	string2lcd("Reverse");
+ 35a:	83 e3       	ldi	r24, 0x33	; 51
+ 35c:	91 e0       	ldi	r25, 0x01	; 1
+ 35e:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE &= ~DIRECTION11;
+ 362:	18 98       	cbi	0x03, 0	; 3
+	PORTE |= DIRECTION12;
+ 364:	19 9a       	sbi	0x03, 1	; 3
+	PORTE &= ~DIRECTION21;
+ 366:	1a 98       	cbi	0x03, 2	; 3
+	PORTE |= DIRECTION22;
+ 368:	1b 9a       	sbi	0x03, 3	; 3
+ 36a:	80 e2       	ldi	r24, 0x20	; 32
+ 36c:	8a 95       	dec	r24
+ 36e:	f1 f7       	brne	.-4      	; 0x36c <reverse+0x12>
+ 370:	08 95       	ret
+
+00000372 <left>:
+/**************************
+*	Sets left motor to forward 
+*	right motor to reverse
+***************************/
+void left(){
+	string2lcd("Left");
+ 372:	8b e3       	ldi	r24, 0x3B	; 59
+ 374:	91 e0       	ldi	r25, 0x01	; 1
+ 376:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION11;
+ 37a:	18 9a       	sbi	0x03, 0	; 3
+	PORTE &= ~DIRECTION12;
+ 37c:	19 98       	cbi	0x03, 1	; 3
+	PORTE &= ~DIRECTION21;
+ 37e:	1a 98       	cbi	0x03, 2	; 3
+	PORTE |= DIRECTION22;
+ 380:	1b 9a       	sbi	0x03, 3	; 3
+ 382:	80 e2       	ldi	r24, 0x20	; 32
+ 384:	8a 95       	dec	r24
+ 386:	f1 f7       	brne	.-4      	; 0x384 <left+0x12>
+ 388:	08 95       	ret
+
+0000038a <right>:
+/**************************
+*	Sets right motor to forward
+*	left motor to reverse
+***************************/
+void right(){
+	string2lcd("right");
+ 38a:	80 e4       	ldi	r24, 0x40	; 64
+ 38c:	91 e0       	ldi	r25, 0x01	; 1
+ 38e:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE &= ~DIRECTION11;
+ 392:	18 98       	cbi	0x03, 0	; 3
+	PORTE |= DIRECTION12;
+ 394:	19 9a       	sbi	0x03, 1	; 3
+	PORTE |= DIRECTION21;
+ 396:	1a 9a       	sbi	0x03, 2	; 3
+	PORTE &= ~DIRECTION22;
+ 398:	1b 98       	cbi	0x03, 3	; 3
+ 39a:	80 e2       	ldi	r24, 0x20	; 32
+ 39c:	8a 95       	dec	r24
+ 39e:	f1 f7       	brne	.-4      	; 0x39c <right+0x12>
+ 3a0:	08 95       	ret
+
+000003a2 <stop>:
+
+/**************************
+*	Sets both motors off
+***************************/
+void stop(){
+	string2lcd("Stop");
+ 3a2:	86 e4       	ldi	r24, 0x46	; 70
+ 3a4:	91 e0       	ldi	r25, 0x01	; 1
+ 3a6:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	PORTE |= DIRECTION11;
+ 3aa:	18 9a       	sbi	0x03, 0	; 3
+	PORTE |= DIRECTION12;
+ 3ac:	19 9a       	sbi	0x03, 1	; 3
+	PORTE |= DIRECTION21;
+ 3ae:	1a 9a       	sbi	0x03, 2	; 3
+	PORTE |= DIRECTION22;
+ 3b0:	1b 9a       	sbi	0x03, 3	; 3
+	PORTE |= DIRECTION31;
+ 3b2:	1d 9a       	sbi	0x03, 5	; 3
+	PORTE |= DIRECTION32;
+ 3b4:	1c 9a       	sbi	0x03, 4	; 3
+ 3b6:	80 e2       	ldi	r24, 0x20	; 32
+ 3b8:	8a 95       	dec	r24
+ 3ba:	f1 f7       	brne	.-4      	; 0x3b8 <stop+0x16>
+ 3bc:	08 95       	ret
+
+000003be <print_nes>:
+
+
+/**************************
+*	Print the controller data, button by button, to the LCD
+***************************/
+void print_nes(){
+ 3be:	cf 93       	push	r28
+ 3c0:	df 93       	push	r29
+ 3c2:	cd b7       	in	r28, 0x3d	; 61
+ 3c4:	de b7       	in	r29, 0x3e	; 62
+ 3c6:	61 97       	sbiw	r28, 0x11	; 17
+ 3c8:	0f b6       	in	r0, 0x3f	; 63
+ 3ca:	f8 94       	cli
+ 3cc:	de bf       	out	0x3e, r29	; 62
+ 3ce:	0f be       	out	0x3f, r0	; 63
+ 3d0:	cd bf       	out	0x3d, r28	; 61
+ 3d2:	fe 01       	movw	r30, r28
+ 3d4:	31 96       	adiw	r30, 0x01	; 1
+ 3d6:	9e 01       	movw	r18, r28
+ 3d8:	2f 5e       	subi	r18, 0xEF	; 239
+ 3da:	3f 4f       	sbci	r19, 0xFF	; 255
+	char buttons[17];
+	int i;
+	for (i = 0; i < 16; ++i){
+		buttons[i] = '-';
+ 3dc:	8d e2       	ldi	r24, 0x2D	; 45
+ 3de:	81 93       	st	Z+, r24
+*	Print the controller data, button by button, to the LCD
+***************************/
+void print_nes(){
+	char buttons[17];
+	int i;
+	for (i = 0; i < 16; ++i){
+ 3e0:	e2 17       	cp	r30, r18
+ 3e2:	f3 07       	cpc	r31, r19
+ 3e4:	e1 f7       	brne	.-8      	; 0x3de <print_nes+0x20>
+		buttons[i] = '-';
+	}
+	if (nes_data[A] == ON){
+ 3e6:	80 91 66 01 	lds	r24, 0x0166
+ 3ea:	81 33       	cpi	r24, 0x31	; 49
+ 3ec:	09 f4       	brne	.+2      	; 0x3f0 <print_nes+0x32>
+ 3ee:	5d c0       	rjmp	.+186    	; 0x4aa <print_nes+0xec>
+		buttons[A] = 'A';
+	}
+	if (nes_data[B] == ON){
+ 3f0:	80 91 5e 01 	lds	r24, 0x015E
+ 3f4:	81 33       	cpi	r24, 0x31	; 49
+ 3f6:	09 f4       	brne	.+2      	; 0x3fa <print_nes+0x3c>
+ 3f8:	55 c0       	rjmp	.+170    	; 0x4a4 <print_nes+0xe6>
+		buttons[B] = 'B';
+	}
+	if (nes_data[X] == ON){
+ 3fa:	80 91 67 01 	lds	r24, 0x0167
+ 3fe:	81 33       	cpi	r24, 0x31	; 49
+ 400:	09 f4       	brne	.+2      	; 0x404 <print_nes+0x46>
+ 402:	4d c0       	rjmp	.+154    	; 0x49e <print_nes+0xe0>
+		buttons[X] = 'X';
+	}
+	if (nes_data[Y] == ON){
+ 404:	80 91 5f 01 	lds	r24, 0x015F
+ 408:	81 33       	cpi	r24, 0x31	; 49
+ 40a:	09 f4       	brne	.+2      	; 0x40e <print_nes+0x50>
+ 40c:	45 c0       	rjmp	.+138    	; 0x498 <print_nes+0xda>
+		buttons[Y] = 'Y';
+	}
+	if (nes_data[Start] == ON){
+ 40e:	80 91 61 01 	lds	r24, 0x0161
+ 412:	81 33       	cpi	r24, 0x31	; 49
+ 414:	f1 f1       	breq	.+124    	; 0x492 <print_nes+0xd4>
+		buttons[Start] = 'S';
+	}
+	if (nes_data[Select] == ON){
+ 416:	80 91 60 01 	lds	r24, 0x0160
+ 41a:	81 33       	cpi	r24, 0x31	; 49
+ 41c:	b9 f1       	breq	.+110    	; 0x48c <print_nes+0xce>
+		buttons[Select] = 'L';
+	}
+	if (nes_data[Up] == ON){
+ 41e:	80 91 62 01 	lds	r24, 0x0162
+ 422:	81 33       	cpi	r24, 0x31	; 49
+ 424:	81 f1       	breq	.+96     	; 0x486 <print_nes+0xc8>
+		buttons[Up] = 'U';
+	}
+	if (nes_data[Down] == ON){
+ 426:	80 91 63 01 	lds	r24, 0x0163
+ 42a:	81 33       	cpi	r24, 0x31	; 49
+ 42c:	49 f1       	breq	.+82     	; 0x480 <print_nes+0xc2>
+		buttons[Down] = 'D';
+	}
+	if (nes_data[Left] == ON){
+ 42e:	80 91 64 01 	lds	r24, 0x0164
+ 432:	81 33       	cpi	r24, 0x31	; 49
+ 434:	11 f1       	breq	.+68     	; 0x47a <print_nes+0xbc>
+		buttons[Left] = 'L';
+	}
+	if (nes_data[Right] == ON){
+ 436:	80 91 65 01 	lds	r24, 0x0165
+ 43a:	81 33       	cpi	r24, 0x31	; 49
+ 43c:	d9 f0       	breq	.+54     	; 0x474 <print_nes+0xb6>
+		buttons[Right] = 'R';
+	}
+	if (nes_data[L] == ON){
+ 43e:	80 91 68 01 	lds	r24, 0x0168
+ 442:	81 33       	cpi	r24, 0x31	; 49
+ 444:	a1 f0       	breq	.+40     	; 0x46e <print_nes+0xb0>
+		buttons[L] = 'C';
+	}
+	if (nes_data[R] == ON){
+ 446:	80 91 69 01 	lds	r24, 0x0169
+ 44a:	81 33       	cpi	r24, 0x31	; 49
+ 44c:	11 f4       	brne	.+4      	; 0x452 <print_nes+0x94>
+		buttons[R] = 'F';
+ 44e:	86 e4       	ldi	r24, 0x46	; 70
+ 450:	8c 87       	std	Y+12, r24	; 0x0c
+	}
+	buttons[16] = '\0';
+ 452:	19 8a       	std	Y+17, r1	; 0x11
+	string2lcd(buttons);
+ 454:	ce 01       	movw	r24, r28
+ 456:	01 96       	adiw	r24, 0x01	; 1
+ 458:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+}
+ 45c:	61 96       	adiw	r28, 0x11	; 17
+ 45e:	0f b6       	in	r0, 0x3f	; 63
+ 460:	f8 94       	cli
+ 462:	de bf       	out	0x3e, r29	; 62
+ 464:	0f be       	out	0x3f, r0	; 63
+ 466:	cd bf       	out	0x3d, r28	; 61
+ 468:	df 91       	pop	r29
+ 46a:	cf 91       	pop	r28
+ 46c:	08 95       	ret
+	}
+	if (nes_data[Right] == ON){
+		buttons[Right] = 'R';
+	}
+	if (nes_data[L] == ON){
+		buttons[L] = 'C';
+ 46e:	83 e4       	ldi	r24, 0x43	; 67
+ 470:	8b 87       	std	Y+11, r24	; 0x0b
+ 472:	e9 cf       	rjmp	.-46     	; 0x446 <print_nes+0x88>
+	}
+	if (nes_data[Left] == ON){
+		buttons[Left] = 'L';
+	}
+	if (nes_data[Right] == ON){
+		buttons[Right] = 'R';
+ 474:	82 e5       	ldi	r24, 0x52	; 82
+ 476:	88 87       	std	Y+8, r24	; 0x08
+ 478:	e2 cf       	rjmp	.-60     	; 0x43e <print_nes+0x80>
+	}
+	if (nes_data[Down] == ON){
+		buttons[Down] = 'D';
+	}
+	if (nes_data[Left] == ON){
+		buttons[Left] = 'L';
+ 47a:	8c e4       	ldi	r24, 0x4C	; 76
+ 47c:	8f 83       	std	Y+7, r24	; 0x07
+ 47e:	db cf       	rjmp	.-74     	; 0x436 <print_nes+0x78>
+	}
+	if (nes_data[Up] == ON){
+		buttons[Up] = 'U';
+	}
+	if (nes_data[Down] == ON){
+		buttons[Down] = 'D';
+ 480:	84 e4       	ldi	r24, 0x44	; 68
+ 482:	8e 83       	std	Y+6, r24	; 0x06
+ 484:	d4 cf       	rjmp	.-88     	; 0x42e <print_nes+0x70>
+	}
+	if (nes_data[Select] == ON){
+		buttons[Select] = 'L';
+	}
+	if (nes_data[Up] == ON){
+		buttons[Up] = 'U';
+ 486:	85 e5       	ldi	r24, 0x55	; 85
+ 488:	8d 83       	std	Y+5, r24	; 0x05
+ 48a:	cd cf       	rjmp	.-102    	; 0x426 <print_nes+0x68>
+	}
+	if (nes_data[Start] == ON){
+		buttons[Start] = 'S';
+	}
+	if (nes_data[Select] == ON){
+		buttons[Select] = 'L';
+ 48c:	8c e4       	ldi	r24, 0x4C	; 76
+ 48e:	8b 83       	std	Y+3, r24	; 0x03
+ 490:	c6 cf       	rjmp	.-116    	; 0x41e <print_nes+0x60>
+	}
+	if (nes_data[Y] == ON){
+		buttons[Y] = 'Y';
+	}
+	if (nes_data[Start] == ON){
+		buttons[Start] = 'S';
+ 492:	83 e5       	ldi	r24, 0x53	; 83
+ 494:	8c 83       	std	Y+4, r24	; 0x04
+ 496:	bf cf       	rjmp	.-130    	; 0x416 <print_nes+0x58>
+	}
+	if (nes_data[X] == ON){
+		buttons[X] = 'X';
+	}
+	if (nes_data[Y] == ON){
+		buttons[Y] = 'Y';
+ 498:	89 e5       	ldi	r24, 0x59	; 89
+ 49a:	8a 83       	std	Y+2, r24	; 0x02
+ 49c:	b8 cf       	rjmp	.-144    	; 0x40e <print_nes+0x50>
+	}
+	if (nes_data[B] == ON){
+		buttons[B] = 'B';
+	}
+	if (nes_data[X] == ON){
+		buttons[X] = 'X';
+ 49e:	88 e5       	ldi	r24, 0x58	; 88
+ 4a0:	8a 87       	std	Y+10, r24	; 0x0a
+ 4a2:	b0 cf       	rjmp	.-160    	; 0x404 <print_nes+0x46>
+	}
+	if (nes_data[A] == ON){
+		buttons[A] = 'A';
+	}
+	if (nes_data[B] == ON){
+		buttons[B] = 'B';
+ 4a4:	82 e4       	ldi	r24, 0x42	; 66
+ 4a6:	89 83       	std	Y+1, r24	; 0x01
+ 4a8:	a8 cf       	rjmp	.-176    	; 0x3fa <print_nes+0x3c>
+	int i;
+	for (i = 0; i < 16; ++i){
+		buttons[i] = '-';
+	}
+	if (nes_data[A] == ON){
+		buttons[A] = 'A';
+ 4aa:	81 e4       	ldi	r24, 0x41	; 65
+ 4ac:	89 87       	std	Y+9, r24	; 0x09
+ 4ae:	a0 cf       	rjmp	.-192    	; 0x3f0 <print_nes+0x32>
+
+000004b0 <spi_init>:
+    }
+}   
+
+/* Run this code before attempting to write to the LCD.*/
+void spi_init(void){
+    DDRF |= 0x08;  //port F bit 3 is enable for LCD
+ 4b0:	e1 e6       	ldi	r30, 0x61	; 97
+ 4b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 4b4:	80 81       	ld	r24, Z
+ 4b6:	88 60       	ori	r24, 0x08	; 8
+ 4b8:	80 83       	st	Z, r24
+    PORTB |= 0x00; //port B initalization for SPI
+ 4ba:	88 b3       	in	r24, 0x18	; 24
+ 4bc:	88 bb       	out	0x18, r24	; 24
+    DDRB |= 0x07;  //Turn on SS, MOSI, SCLK 
+ 4be:	87 b3       	in	r24, 0x17	; 23
+ 4c0:	87 60       	ori	r24, 0x07	; 7
+ 4c2:	87 bb       	out	0x17, r24	; 23
+    //Master mode, Clock=clk/2, Cycle half phase, Low polarity, MSB first  
+    SPCR = 0x50;
+ 4c4:	80 e5       	ldi	r24, 0x50	; 80
+ 4c6:	8d b9       	out	0x0d, r24	; 13
+    SPSR = 0x01;
+ 4c8:	81 e0       	ldi	r24, 0x01	; 1
+ 4ca:	8e b9       	out	0x0e, r24	; 14
+ 4cc:	08 95       	ret
+
+000004ce <lcd_init>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 4ce:	8f e5       	ldi	r24, 0x5F	; 95
+ 4d0:	9a ee       	ldi	r25, 0xEA	; 234
+ 4d2:	01 97       	sbiw	r24, 0x01	; 1
+ 4d4:	f1 f7       	brne	.-4      	; 0x4d2 <lcd_init+0x4>
+ 4d6:	00 c0       	rjmp	.+0      	; 0x4d8 <lcd_init+0xa>
+ 4d8:	00 00       	nop
+ 4da:	23 e0       	ldi	r18, 0x03	; 3
+ 4dc:	30 e0       	ldi	r19, 0x00	; 0
+    //initalize the LCD to receive data
+    _delay_ms(15);   
+    for(i=0; i<=2; i++){ //do funky initalize sequence 3 times
+        SPDR = 0x00;
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+        SPDR = 0x30;
+ 4de:	90 e3       	ldi	r25, 0x30	; 48
+void lcd_init(void){
+    int i;
+    //initalize the LCD to receive data
+    _delay_ms(15);   
+    for(i=0; i<=2; i++){ //do funky initalize sequence 3 times
+        SPDR = 0x00;
+ 4e0:	1f b8       	out	0x0f, r1	; 15
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 4e2:	77 9b       	sbis	0x0e, 7	; 14
+ 4e4:	fe cf       	rjmp	.-4      	; 0x4e2 <lcd_init+0x14>
+        SPDR = 0x30;
+ 4e6:	9f b9       	out	0x0f, r25	; 15
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 4e8:	77 9b       	sbis	0x0e, 7	; 14
+ 4ea:	fe cf       	rjmp	.-4      	; 0x4e8 <lcd_init+0x1a>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 4ec:	80 91 62 00 	lds	r24, 0x0062
+ 4f0:	88 60       	ori	r24, 0x08	; 8
+ 4f2:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 4f6:	80 91 62 00 	lds	r24, 0x0062
+ 4fa:	87 7f       	andi	r24, 0xF7	; 247
+ 4fc:	80 93 62 00 	sts	0x0062, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 500:	85 ec       	ldi	r24, 0xC5	; 197
+ 502:	8a 95       	dec	r24
+ 504:	f1 f7       	brne	.-4      	; 0x502 <lcd_init+0x34>
+ 506:	00 00       	nop
+ 508:	21 50       	subi	r18, 0x01	; 1
+ 50a:	31 09       	sbc	r19, r1
+//initialize the LCD to receive data
+void lcd_init(void){
+    int i;
+    //initalize the LCD to receive data
+    _delay_ms(15);   
+    for(i=0; i<=2; i++){ //do funky initalize sequence 3 times
+ 50c:	49 f7       	brne	.-46     	; 0x4e0 <lcd_init+0x12>
+        while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+        strobe_lcd();
+        _delay_us(37);
+    }
+
+    SPDR = 0x00;
+ 50e:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 510:	77 9b       	sbis	0x0e, 7	; 14
+ 512:	fe cf       	rjmp	.-4      	; 0x510 <lcd_init+0x42>
+    SPDR = 0x38;
+ 514:	88 e3       	ldi	r24, 0x38	; 56
+ 516:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 518:	77 9b       	sbis	0x0e, 7	; 14
+ 51a:	fe cf       	rjmp	.-4      	; 0x518 <lcd_init+0x4a>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 51c:	80 91 62 00 	lds	r24, 0x0062
+ 520:	88 60       	ori	r24, 0x08	; 8
+ 522:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 526:	80 91 62 00 	lds	r24, 0x0062
+ 52a:	87 7f       	andi	r24, 0xF7	; 247
+ 52c:	80 93 62 00 	sts	0x0062, r24
+ 530:	95 ec       	ldi	r25, 0xC5	; 197
+ 532:	9a 95       	dec	r25
+ 534:	f1 f7       	brne	.-4      	; 0x532 <lcd_init+0x64>
+ 536:	00 00       	nop
+    SPDR = 0x38;
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+    strobe_lcd();
+    _delay_us(37);
+
+    SPDR = 0x00;
+ 538:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 53a:	77 9b       	sbis	0x0e, 7	; 14
+ 53c:	fe cf       	rjmp	.-4      	; 0x53a <lcd_init+0x6c>
+    SPDR = 0x08;
+ 53e:	88 e0       	ldi	r24, 0x08	; 8
+ 540:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 542:	77 9b       	sbis	0x0e, 7	; 14
+ 544:	fe cf       	rjmp	.-4      	; 0x542 <lcd_init+0x74>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 546:	80 91 62 00 	lds	r24, 0x0062
+ 54a:	88 60       	ori	r24, 0x08	; 8
+ 54c:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 550:	80 91 62 00 	lds	r24, 0x0062
+ 554:	87 7f       	andi	r24, 0xF7	; 247
+ 556:	80 93 62 00 	sts	0x0062, r24
+ 55a:	85 ec       	ldi	r24, 0xC5	; 197
+ 55c:	8a 95       	dec	r24
+ 55e:	f1 f7       	brne	.-4      	; 0x55c <lcd_init+0x8e>
+ 560:	00 00       	nop
+    SPDR = 0x08;
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+    strobe_lcd();
+    _delay_us(37);
+
+    SPDR = 0x00;
+ 562:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 564:	77 9b       	sbis	0x0e, 7	; 14
+ 566:	fe cf       	rjmp	.-4      	; 0x564 <lcd_init+0x96>
+    SPDR = 0x01;
+ 568:	81 e0       	ldi	r24, 0x01	; 1
+ 56a:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 56c:	77 9b       	sbis	0x0e, 7	; 14
+ 56e:	fe cf       	rjmp	.-4      	; 0x56c <lcd_init+0x9e>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 570:	80 91 62 00 	lds	r24, 0x0062
+ 574:	88 60       	ori	r24, 0x08	; 8
+ 576:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 57a:	80 91 62 00 	lds	r24, 0x0062
+ 57e:	87 7f       	andi	r24, 0xF7	; 247
+ 580:	80 93 62 00 	sts	0x0062, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 584:	8f ef       	ldi	r24, 0xFF	; 255
+ 586:	98 e1       	ldi	r25, 0x18	; 24
+ 588:	01 97       	sbiw	r24, 0x01	; 1
+ 58a:	f1 f7       	brne	.-4      	; 0x588 <lcd_init+0xba>
+ 58c:	00 c0       	rjmp	.+0      	; 0x58e <lcd_init+0xc0>
+ 58e:	00 00       	nop
+    SPDR = 0x01;
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+    strobe_lcd();
+    _delay_ms(1.6);
+
+    SPDR = 0x00;
+ 590:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 592:	77 9b       	sbis	0x0e, 7	; 14
+ 594:	fe cf       	rjmp	.-4      	; 0x592 <lcd_init+0xc4>
+    SPDR = 0x06;
+ 596:	86 e0       	ldi	r24, 0x06	; 6
+ 598:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 59a:	77 9b       	sbis	0x0e, 7	; 14
+ 59c:	fe cf       	rjmp	.-4      	; 0x59a <lcd_init+0xcc>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 59e:	80 91 62 00 	lds	r24, 0x0062
+ 5a2:	88 60       	ori	r24, 0x08	; 8
+ 5a4:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 5a8:	80 91 62 00 	lds	r24, 0x0062
+ 5ac:	87 7f       	andi	r24, 0xF7	; 247
+ 5ae:	80 93 62 00 	sts	0x0062, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 5b2:	95 ec       	ldi	r25, 0xC5	; 197
+ 5b4:	9a 95       	dec	r25
+ 5b6:	f1 f7       	brne	.-4      	; 0x5b4 <lcd_init+0xe6>
+ 5b8:	00 00       	nop
+    SPDR = 0x06;
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+    strobe_lcd();
+    _delay_us(37);
+
+    SPDR = 0x00;
+ 5ba:	1f b8       	out	0x0f, r1	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 5bc:	77 9b       	sbis	0x0e, 7	; 14
+ 5be:	fe cf       	rjmp	.-4      	; 0x5bc <lcd_init+0xee>
+    SPDR = 0x0E;
+ 5c0:	8e e0       	ldi	r24, 0x0E	; 14
+ 5c2:	8f b9       	out	0x0f, r24	; 15
+    while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
+ 5c4:	77 9b       	sbis	0x0e, 7	; 14
+ 5c6:	fe cf       	rjmp	.-4      	; 0x5c4 <lcd_init+0xf6>
+		++i;
+	}
+}
+//twiddles bit 3, PORTF creating the enable signal for the LCD
+void strobe_lcd(void){
+    PORTF |= 0x08;
+ 5c8:	80 91 62 00 	lds	r24, 0x0062
+ 5cc:	88 60       	ori	r24, 0x08	; 8
+ 5ce:	80 93 62 00 	sts	0x0062, r24
+    PORTF &= ~0x08;
+ 5d2:	80 91 62 00 	lds	r24, 0x0062
+ 5d6:	87 7f       	andi	r24, 0xF7	; 247
+ 5d8:	80 93 62 00 	sts	0x0062, r24
+ 5dc:	85 ec       	ldi	r24, 0xC5	; 197
+ 5de:	8a 95       	dec	r24
+ 5e0:	f1 f7       	brne	.-4      	; 0x5de <lcd_init+0x110>
+ 5e2:	00 00       	nop
+ 5e4:	08 95       	ret
+
+000005e6 <main>:
+uint8_t temp, read_byte;
+
+
+
+int main(void){
+	DDRB = 0xFF;		//set PORTB to OUTPUTS
+ 5e6:	8f ef       	ldi	r24, 0xFF	; 255
+ 5e8:	87 bb       	out	0x17, r24	; 23
+    PORTB = 0x00;		//set all of portb to low
+ 5ea:	18 ba       	out	0x18, r1	; 24
+    //DDRD =0x00;			//Set portD to INPUTS
+    //PORTD = 0x00;		//Set all of PORTD to low
+    DDRE = 0xFF;		//Set portE to OUTPUTS
+ 5ec:	82 b9       	out	0x02, r24	; 2
+	DDRF &= ~(1 << 0);	// PORTF Pin 1 is input for data
+ 5ee:	80 91 61 00 	lds	r24, 0x0061
+ 5f2:	8e 7f       	andi	r24, 0xFE	; 254
+ 5f4:	80 93 61 00 	sts	0x0061, r24
+    }
+}   
+
+/* Run this code before attempting to write to the LCD.*/
+void spi_init(void){
+    DDRF |= 0x08;  //port F bit 3 is enable for LCD
+ 5f8:	80 91 61 00 	lds	r24, 0x0061
+ 5fc:	88 60       	ori	r24, 0x08	; 8
+ 5fe:	80 93 61 00 	sts	0x0061, r24
+    PORTB |= 0x00; //port B initalization for SPI
+ 602:	88 b3       	in	r24, 0x18	; 24
+ 604:	88 bb       	out	0x18, r24	; 24
+    DDRB |= 0x07;  //Turn on SS, MOSI, SCLK 
+ 606:	87 b3       	in	r24, 0x17	; 23
+ 608:	87 60       	ori	r24, 0x07	; 7
+ 60a:	87 bb       	out	0x17, r24	; 23
+    //Master mode, Clock=clk/2, Cycle half phase, Low polarity, MSB first  
+    SPCR = 0x50;
+ 60c:	80 e5       	ldi	r24, 0x50	; 80
+ 60e:	8d b9       	out	0x0d, r24	; 13
+    SPSR = 0x01;
+ 610:	81 e0       	ldi	r24, 0x01	; 1
+ 612:	8e b9       	out	0x0e, r24	; 14
+    DDRE = 0xFF;		//Set portE to OUTPUTS
+	DDRF &= ~(1 << 0);	// PORTF Pin 1 is input for data
+
+
+    spi_init();
+    lcd_init();
+ 614:	0e 94 67 02 	call	0x4ce	; 0x4ce <lcd_init>
+/**************************
+*	Initializes uart1 with the given ubrr
+***************************/
+void USART_Init( unsigned int ubrr ) {
+    /* Set baud rate */
+    UBRR1H = (unsigned char)(ubrr>>8);
+ 618:	10 92 98 00 	sts	0x0098, r1
+    UBRR1L = (unsigned char)ubrr;
+ 61c:	87 e6       	ldi	r24, 0x67	; 103
+ 61e:	80 93 99 00 	sts	0x0099, r24
+    /* Enable receiver and transmitter */ 
+    UCSR1B = (1<<RXEN1)|(1<<TXEN1);
+ 622:	88 e1       	ldi	r24, 0x18	; 24
+ 624:	80 93 9a 00 	sts	0x009A, r24
+    /* Set frame format: 9data, 1stop bit */ 
+    UCSR1C = (1 << UCSZ12) | (1 << UCSZ11) | (1 << UCSZ10);
+ 628:	86 e0       	ldi	r24, 0x06	; 6
+ 62a:	80 93 9d 00 	sts	0x009D, r24
+ 62e:	ee e5       	ldi	r30, 0x5E	; 94
+ 630:	f1 e0       	ldi	r31, 0x01	; 1
+	USART_Init(BLUETOOTH_UBRR);
+	int i;
+	
+	//Initialize the buffer to dashes for printing
+    for (i = 0; i < 16; ++i){
+        nes_data[i] = '-';
+ 632:	8d e2       	ldi	r24, 0x2D	; 45
+ 634:	81 93       	st	Z+, r24
+    lcd_init();
+	USART_Init(BLUETOOTH_UBRR);
+	int i;
+	
+	//Initialize the buffer to dashes for printing
+    for (i = 0; i < 16; ++i){
+ 636:	21 e0       	ldi	r18, 0x01	; 1
+ 638:	ee 36       	cpi	r30, 0x6E	; 110
+ 63a:	f2 07       	cpc	r31, r18
+ 63c:	d9 f7       	brne	.-10     	; 0x634 <main+0x4e>
+        nes_data[i] = '-';
+    }
+	//Set the end of the string
+	nes_data[16] = '\0';
+ 63e:	10 92 6e 01 	sts	0x016E, r1
+
+    clear_display();
+ 642:	0e 94 d2 00 	call	0x1a4	; 0x1a4 <clear_display>
+    string2lcd("Starting Program");
+ 646:	8b e4       	ldi	r24, 0x4B	; 75
+ 648:	91 e0       	ldi	r25, 0x01	; 1
+ 64a:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 64e:	8f ef       	ldi	r24, 0xFF	; 255
+ 650:	99 e6       	ldi	r25, 0x69	; 105
+ 652:	28 e1       	ldi	r18, 0x18	; 24
+ 654:	81 50       	subi	r24, 0x01	; 1
+ 656:	90 40       	sbci	r25, 0x00	; 0
+ 658:	20 40       	sbci	r18, 0x00	; 0
+ 65a:	e1 f7       	brne	.-8      	; 0x654 <main+0x6e>
+ 65c:	00 c0       	rjmp	.+0      	; 0x65e <main+0x78>
+ 65e:	00 00       	nop
+***************************/
+void USART_Transmit( unsigned char data ) {
+    /* Wait for empty transmit buffer */ 
+    while ( !( UCSR1A & (1<<UDRE1)) );
+    /* Put data into buffer, sends the data */ 
+    UDR1 = data;
+ 660:	c1 e6       	ldi	r28, 0x61	; 97
+    string2lcd("Starting Program");
+	char a = 'a';
+    _delay_ms(500);
+	while(1){
+        
+		clear_display();
+ 662:	0e 94 d2 00 	call	0x1a4	; 0x1a4 <clear_display>
+/**************************
+*	Transmits the given byte over uart1
+***************************/
+void USART_Transmit( unsigned char data ) {
+    /* Wait for empty transmit buffer */ 
+    while ( !( UCSR1A & (1<<UDRE1)) );
+ 666:	80 91 9b 00 	lds	r24, 0x009B
+ 66a:	85 ff       	sbrs	r24, 5
+ 66c:	fc cf       	rjmp	.-8      	; 0x666 <main+0x80>
+    /* Put data into buffer, sends the data */ 
+    UDR1 = data;
+ 66e:	c0 93 9c 00 	sts	0x009C, r28
+*	Wait for data to be received, then
+*	return the data from UDR1
+***************************/
+unsigned char USART_Receive( void ) {
+	/* Wait for data to be received */ //
+	while ( !(UCSR1A & (1<<RXC1)) ){
+ 672:	80 91 9b 00 	lds	r24, 0x009B
+ 676:	87 ff       	sbrs	r24, 7
+ 678:	fc cf       	rjmp	.-8      	; 0x672 <main+0x8c>
+	}
+	/* Get and return received data from buffer */ 
+	
+	return UDR1;
+ 67a:	80 91 9c 00 	lds	r24, 0x009C
+	while(1){
+        
+		clear_display();
+		USART_Transmit('a');
+		a = USART_Receive();
+		nes_data[1] = a;
+ 67e:	80 93 5f 01 	sts	0x015F, r24
+		string2lcd(nes_data);
+ 682:	8e e5       	ldi	r24, 0x5E	; 94
+ 684:	91 e0       	ldi	r25, 0x01	; 1
+ 686:	0e 94 18 01 	call	0x230	; 0x230 <string2lcd>
+ 68a:	8f ef       	ldi	r24, 0xFF	; 255
+ 68c:	91 ee       	ldi	r25, 0xE1	; 225
+ 68e:	24 e0       	ldi	r18, 0x04	; 4
+ 690:	81 50       	subi	r24, 0x01	; 1
+ 692:	90 40       	sbci	r25, 0x00	; 0
+ 694:	20 40       	sbci	r18, 0x00	; 0
+ 696:	e1 f7       	brne	.-8      	; 0x690 <main+0xaa>
+ 698:	00 c0       	rjmp	.+0      	; 0x69a <main+0xb4>
+ 69a:	00 00       	nop
+ 69c:	e2 cf       	rjmp	.-60     	; 0x662 <main+0x7c>
+
+0000069e <_exit>:
+ 69e:	f8 94       	cli
+
+000006a0 <__stop_program>:
+ 6a0:	ff cf       	rjmp	.-2      	; 0x6a0 <__stop_program>
