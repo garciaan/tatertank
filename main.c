@@ -1,11 +1,9 @@
 
 #ifndef F_CPU
-#define F_CPU 16000000UL
+#define F_CPU 2000000UL
 #endif
 #define BAUD 1200
 #define UBRR 832
-#define BLUETOOTH_BAUD 9600
-#define BLUETOOTH_UBRR  103
 #define P1 0x01
 #define P2 0x02
 #define P3 0x04
@@ -62,9 +60,6 @@ void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
 unsigned char USART_Receive( void );
 char* USART_get_string(void);
-void USART0_INIT(unsig vned int ubrr);
-void USART0_Transmit(unsigned char data);
-unsigned char USART0_Receive(void);
 void home_line2(void);
 void string2lcd(char *lcd_str);
 void strobe_lcd(void);
@@ -100,8 +95,7 @@ uint8_t temp, read_byte;
 int main(void){
 	DDRB = 0xFF;
     PORTB = 0x00;
-    DDRD =0x00;
-    PORTD = 0x00;
+    DDRD = 0x00;
     DDRE = 0xFF;    //OUTPUTS
 	DDRF &= ~(1 << 0); // PORTF Pin 1 is input for data
 
@@ -109,7 +103,8 @@ int main(void){
 	char buffer[16];
     spi_init();
     lcd_init();
-	USART0_Init(BLUETOOTH_UBRR);
+	USART_Init(UBRR);
+
 	int i;
     
     for (i = 0; i < 16; ++i){
@@ -117,15 +112,53 @@ int main(void){
     }
 	nes_data[16] = '\0';
     clear_display();
-    string2lcd("Starting Program");
+    //string2lcd("Starting Program");
 
     _delay_ms(500);
+	read_data();
+	//while (nes_data[Start] == OFF);
+	USART_Transmit(Start);
     while(1){
-        
-
-    
+		clear_display();
+		read_data();
+		if (nes_data[Up] == ON){
+			forward();
+            USART_Transmit(Up);
+		}
+		else if (nes_data[Down] == ON){
+			reverse();
+            USART_Transmit(Down);
+		}
+		else if (nes_data[Right] == ON){
+			right();
+			USART_Transmit(Right);
+		}
+		else if (nes_data[Left] == ON){
+			left();
+            USART_Transmit(Left);
+		}
+		else if (nes_data[R] == ON){
+			fire();
+            USART_Transmit(R);
+		}
+		else if (nes_data[X] == ON){
+			//USART_Transmit(X);
+		}
+		else if (nes_data[B] == ON){
+			//USART_Transmit(B);
+		}
+		else if (nes_data[Y] == ON){
+			USART_Transmit(Y);
+		}
+		else if (nes_data[A] == ON){
+			USART_Transmit(A);
+		}
+		else {
+			stop();
+            USART_Transmit(255);
+		}
 		
-		_delay_ms(60);
+		_delay_ms(30);
 		
         
 	}
@@ -378,7 +411,7 @@ void USART_Transmit( unsigned char data ) {
 }
 
 unsigned char USART_Receive( void ) {
-/* Wait for data to be received */ //while ( !(UCSR1A & (1<<RXC)) );
+/* Wait for data to be received */ while ( !(UCSR1A & (1<<RXC)) );
 /* Get and return received data from buffer */ return UDR1;
 }
 
@@ -491,25 +524,4 @@ void lcd_init(void){
     while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
     strobe_lcd();
     _delay_us(37);
-}
-void USART0_INIT(unsigned int ubrr){
-    /* Set baud rate */
-    UBRR0H = (unsigned char)(ubrr>>8);
-    UBRR0L = (unsigned char)ubrr;
-    /* Enable receiver and transmitter */ 
-    UCSR0B = (1<<RXEN0)|(1<<TXEN0);
-    /* Set frame format: 8data, 2stop bit */ 
-    UCSR0C = (1<<USBS0)|(3<<UCSZ01);
-}
-void USART0_Transmit(unsigned char data){
-    /* Wait for empty transmit buffer */ 
-    while ( !( UCSR0A & (1<<UDRE0)) );
-    /* Put data into buffer, sends the data */ 
-    UDR0 = data;
-}
-unsigned char USART0_Receive(void){
-    /* Wait for data to be received */ 
-    while ( !(UCSR0A & (1<<RXC)) );
-    /* Get and return received data from buffer */ 
-    return UDR0;
 }
