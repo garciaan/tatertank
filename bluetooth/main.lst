@@ -1527,8 +1527,8 @@ unsigned char USART_Receive( void ) {
 		clear_display();
 		USART_Transmit('a');
 		a = USART_Receive();
-		nes_data[1] = a;
- 67e:	80 93 5f 01 	sts	0x015F, r24
+		nes_data[0] = a;
+ 67e:	80 93 5e 01 	sts	0x015E, r24
 		string2lcd(nes_data);
  682:	8e e5       	ldi	r24, 0x5E	; 94
  684:	91 e0       	ldi	r25, 0x01	; 1

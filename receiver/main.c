@@ -2,8 +2,8 @@
 #ifndef F_CPU
 #define F_CPU 16000000UL
 #endif
-#define BAUD 1200
-#define UBRR 832
+#define BAUD 9600
+#define UBRR F_CPU/16/BAUD-1
 
 //NES Controller
 #define LATCH	(1 << 7)	//PORTB
@@ -53,6 +53,7 @@ enum BUTTON {
 
 void USART_Init( unsigned int ubrr );
 void USART_Transmit( unsigned char data );
+void USART_send_string(char *data);
 unsigned char USART_Receive( void );
 char* USART_get_string(void);
 void home_line2(void);
@@ -89,8 +90,8 @@ uint8_t temp, read_byte;
 int main(void){
 	DDRB = 0xFF;		//set PORTB to OUTPUTS
     PORTB = 0x00;		//set all of portb to low
-    DDRD =0x00;			//Set portD to INPUTS
-    PORTD = 0x00;		//Set all of PORTD to low
+    //DDRD =0x00;			//Set portD to INPUTS
+    //PORTD = 0x00;		//Set all of PORTD to low
     DDRE = 0xFF;		//Set portE to OUTPUTS
 	DDRF &= ~(1 << 0);	// PORTF Pin 1 is input for data
 
@@ -401,8 +402,8 @@ void USART_Init( unsigned int ubrr ) {
     UBRR1L = (unsigned char)ubrr;
     /* Enable receiver and transmitter */ 
     UCSR1B = (1<<RXEN1)|(1<<TXEN1);
-    /* Set frame format: 8data, 2stop bit */ 
-    UCSR1C = (1<<USBS1)|(3<<UCSZ01);
+    /* Set frame format: 9data, 1stop bit */ 
+    UCSR1C = UCSR1C = (1 << UCSZ12) | (1 << UCSZ11) | (1 << UCSZ10);
 }
 
 
@@ -422,17 +423,31 @@ void USART_Transmit( unsigned char data ) {
 *	return the data from UDR1
 ***************************/
 unsigned char USART_Receive( void ) {
+
 	/* Wait for data to be received */ //
-	while ( !(UCSR1A & (1<<RXC)) ){
+	/* //we don't want to block
+    while ( !(UCSR1A & (1<<RXC)) ){
 		clear_display();
 		stop();
 		_delay_ms(50);
 	}
-	/* Get and return received data from buffer */ 
-	
-	return UDR1;
+    */
+    if (UCSR1A & (1<<RXC)){
+    	/* Get and return received data from buffer */ 
+    	return UDR1;
+    }
+    else {
+        return 255;
+    }
 }
 
+void USART_send_string(char *data){
+    int i = 0;
+    while (data[i] != '\0'){
+        USART_Transmit(data[i]);
+        ++i;
+    }
+}
 //twiddles bit 3, PORTF creating the enable signal for the LCD
 void strobe_lcd(void){
     PORTF |= 0x08;
@@ -446,7 +461,7 @@ void clear_display(void){
     SPDR = 0x01;    //clear display command
     while (!(SPSR & 0x80)) {}   // Wait for SPI transfer to complete
     strobe_lcd();   //strobe the LCD enable pin
-    _delay_ms(1.6);   //obligatory waiting for slow LCD
+    _delay_ms(2.6);   //obligatory waiting for slow LCD
 }
 
 void home_line2(void){

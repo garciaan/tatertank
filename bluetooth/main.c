@@ -118,7 +118,7 @@ int main(void){
 		clear_display();
 		USART_Transmit('a');
 		a = USART_Receive();
-		nes_data[1] = a;
+		nes_data[0] = a;
 		string2lcd(nes_data);
 		_delay_ms(100);
         
