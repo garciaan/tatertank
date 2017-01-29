@@ -21,8 +21,8 @@
 #define DIRECTION22	(1 << 3)	//PORTE
 #define DIRECTION31 (1 << 5)	//PORTE
 #define DIRECTION32 (1 << 4)	//PORTE
-
-#define STEP_TIME 100
+#define MOTOR_ON_TIME 6 //num ms that motor will do an action for
+#define STEP_TIME 100   //num ms that a motor will do a step for
 
 //Other Outputs
 #define FIRE		(1 << 5)	//PORTB
@@ -40,7 +40,9 @@ enum BUTTON {
 	A,
 	X,
 	L,
-	R
+	R,
+    SwingRight,
+    SwingLeft
 };
 
 #include <avr/io.h>
@@ -75,6 +77,8 @@ void forward();
 void reverse();
 void left();
 void right();
+void swing_left();
+void swing_right();
 void stop();
 void fire();
 void lookUp();
@@ -143,11 +147,17 @@ int main(void){
 			case A:
 				stepUp();
 				break;
+            case SwingRight:
+                swing_right();
+                break;
+            case SwingLeft:
+                swing_left();
+                break;
 			default:
                 stop();
                 break;
         }
-    
+
 		
 		_delay_ms(60);
 		
@@ -230,7 +240,7 @@ void forward(){
 	PORTE &= ~DIRECTION12;
 	PORTE |= DIRECTION21;
 	PORTE &= ~DIRECTION22;
-	_delay_us(6);
+	_delay_us(MOTOR_ON_TIME);
 }
 
 
@@ -243,13 +253,13 @@ void reverse(){
 	PORTE |= DIRECTION12;
 	PORTE &= ~DIRECTION21;
 	PORTE |= DIRECTION22;
-	_delay_us(6);
+	_delay_us(MOTOR_ON_TIME);
 }
 
 
 /**************************
-*	Sets left motor to forward 
-*	right motor to reverse
+*	Sets right motor to forward 
+*	left motor to reverse
 ***************************/
 void left(){
 	string2lcd("Left");
@@ -257,21 +267,48 @@ void left(){
 	PORTE &= ~DIRECTION12;
 	PORTE &= ~DIRECTION21;
 	PORTE |= DIRECTION22;
-	_delay_us(6);
+	_delay_us(MOTOR_ON_TIME);
 }
 
 /**************************
-*	Sets right motor to forward
-*	left motor to reverse
+*   Sets right motor to forward 
+*   left motor to stop
+***************************/
+void swing_left(){
+    string2lcd("Swing Left");
+    PORTE |= DIRECTION11;
+    PORTE &= ~DIRECTION12;
+    PORTE |= DIRECTION21;
+    PORTE |= DIRECTION22;
+    _delay_us(MOTOR_ON_TIME);
+}
+
+/**************************
+*	Sets left motor to forward
+*	right motor to reverse
 ***************************/
 void right(){
-	string2lcd("right");
+	string2lcd("Right");
 	PORTE &= ~DIRECTION11;
 	PORTE |= DIRECTION12;
 	PORTE |= DIRECTION21;
 	PORTE &= ~DIRECTION22;
-	_delay_us(6);
+	_delay_us(MOTOR_ON_TIME);
 }
+
+/**************************
+*   Sets right motor to forward
+*   left motor to off
+***************************/
+void swing_right(){
+    string2lcd("Swing Right");
+    PORTE |= DIRECTION11;
+    PORTE |= DIRECTION12;
+    PORTE |= DIRECTION21;
+    PORTE &= ~DIRECTION22;
+    _delay_us(MOTOR_ON_TIME);
+}
+
 
 
 /**************************
